@@ -1,5 +1,8 @@
 # YTSimulator
 A webApp which fetches Youtube videos on certain topic and saves it in database, where you can search it too.
+## Deployed in
+    http://ytsim.pythonanywhere.com/
+    
 ## How to build Project
     I. Clone the Project
     II. Install Python 3
@@ -18,8 +21,7 @@ A webApp which fetches Youtube videos on certain topic and saves it in database,
     GET /api/getSearch/?query=dog
                 It searches the DB for the query in title or description
 
-## Deployed in
-    http://ytsim.pythonanywhere.com/
+
             
     
         
