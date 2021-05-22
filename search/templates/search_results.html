@@ -22,9 +22,7 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url 'yt-api' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Search</a>
-                </li>
+            
                 
               </ul>
             </div>
@@ -37,7 +35,10 @@
                     YT Simulator
                 </h2>
             </div>
-           
+          
+
+
+
             <div class="col-md-10 mx-auto">
 
                 <!-- DATA CARDS -->
@@ -49,15 +50,15 @@
                             {% for i in results %}
                                 <div class="d-inline-block card w-25 my-3 mx-3">
                                     <div class="card-body">
-                                        <h4>{{i.title}}</h4>
+                                        <h4>{{i.title|safe}}</h4>
                                         <!-- <h5 class="font-weight-light">{{i.author}}</h5> -->
-                                        <h6 class="font-weight-light">{{i.pub_date}}</h6>
+                                        <h6 class="font-weight-light">{{i.pub_date|slice:":10"}}</h6>
                                         <img src="{{i.thumbnails}}" alt="{{i.title}}"/>
                                         
                                     </div>
                                     <div class="card-footer">
                                         {{i.description|safe|truncatewords:6}}
-                                        <!-- <a href="https://www.youtube.com/watch?{{i.vid_id}}" class="btn btn-info">Watch Video</a> -->
+                                        <a href="https://www.youtube.com/watch?v={{i.vid_id}}" class="btn btn-info">Watch Video</a>
                                     </div>
                                     
             

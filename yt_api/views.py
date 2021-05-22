@@ -10,6 +10,8 @@ from .models import *
 from django.core.paginator import Paginator
 import json
 from search.views import SearchResults
+import datetime
+
 
 def process_data(json_dict):
     items = json_dict["items"]
@@ -21,7 +23,6 @@ def process_data(json_dict):
 
     
     for i in range(len(items)):
-        
         
         video_id = items[i]["id"]["videoId"]
 
@@ -52,10 +53,12 @@ def IndexView(request):
             print(yt_data)
             processed_data = process_data(yt_data)
             
-        except:
+        except Exception as e:
+            # This block Can be used to swap API KEYS
+            print("ERROR : ",str(e))
             print("API LIMIT EXHAUSTED!")
         
-        vid_objs = VideoData.objects.all()
+        vid_objs = VideoData.objects.all().order_by('-id')
         paginator = Paginator(vid_objs, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -65,6 +68,9 @@ def IndexView(request):
             'videos':page_obj,
         }
         return render(request,"index.html",context)
+
+def ErrorPage(request,message):
+    return render(request,"error.html",{'msg':message})
 
 
 
