@@ -52,13 +52,13 @@ def IndexView(request):
             yt_data = youtube_search()    
             print(yt_data)
             processed_data = process_data(yt_data)
-            
+            # print("Processed : ",processed_data)
         except Exception as e:
             # This block Can be used to swap API KEYS
             print("ERROR : ",str(e))
             print("API LIMIT EXHAUSTED!")
         
-        vid_objs = VideoData.objects.all().order_by('id')
+        vid_objs = VideoData.objects.all().order_by('-id')
         paginator = Paginator(vid_objs, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)

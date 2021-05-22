@@ -40,7 +40,7 @@ class VideoSearchApiView(APIView):
 
         print("Query : ",query)
         if(len(query)<1):
-            data = VideoData.objects.all().order_by('id')
+            data = VideoData.objects.all().order_by('-id')
             print("data : ",type(data))
             serializer = VideoDataSerializers(data, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
