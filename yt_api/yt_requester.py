@@ -9,7 +9,7 @@ import json
 DEVELOPER_KEY="AIzaSyB-Gq2kFnNTbODAHqOLNwdLvc5fYWWD9sQ"
 SERVICE_VERSION = 'v3'
 SERVICE_NAME="youtube"
-QUERY = "Games"
+QUERY = "Games or food or fashion"
 # End of var
 
 def youtube_search(query=QUERY):
