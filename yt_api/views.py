@@ -9,7 +9,7 @@ from .app_serializers import VideoDataSerializers
 from .models import *
 from django.core.paginator import Paginator
 import json
-
+from search.views import SearchResults
 
 def process_data(json_dict):
     items = json_dict["items"]
@@ -24,7 +24,8 @@ def process_data(json_dict):
         
         
         video_id = items[i]["id"]["videoId"]
-        # print("Video id : ",video_id)
+
+        # If video is already in DB, we won't save it again.
         isUnique = not (VideoData.objects.filter(vid_id=video_id).exists())
         if isUnique==True:
             snippet = items[i]["snippet"]
@@ -39,26 +40,31 @@ def process_data(json_dict):
     return [title,thumbnails,description,pub_date,video_id]
 
 
-    
+  
 
 def IndexView(request):
-    try:
-        yt_data = youtube_search()    
-        print(yt_data)
-        processed_data = process_data(yt_data)
+    if(request.method=="GET"):
+        search_query = request.GET.get('q')
+        if(search_query!=None and len(search_query)>0):
+            return SearchResults(request,search_query)
+        try:
+            yt_data = youtube_search()    
+            print(yt_data)
+            processed_data = process_data(yt_data)
+            
+        except:
+            print("API LIMIT EXHAUSTED!")
         
-    except:
-        pass
-    vid_objs = VideoData.objects.all()
-    paginator = Paginator(vid_objs, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'page_obj':page_obj,
-        'videos':page_obj,
-    }
-    return render(request,"index.html",context)
+        vid_objs = VideoData.objects.all()
+        paginator = Paginator(vid_objs, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context = {
+            'page_obj':page_obj,
+            'videos':page_obj,
+        }
+        return render(request,"index.html",context)
 
 
 

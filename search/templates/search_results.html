@@ -41,26 +41,12 @@
             <div class="col-md-10 mx-auto">
 
                 <!-- DATA CARDS -->
-                <div class="row-md-8 mx-auto">
-                
-                    <div class="col-md-12 mx-auto my-5 input input-group">
-                        <div class="form-outline">
-                                <form class="" method="GET" action="" >
-                                <input class="form-control" type="search" name="q"> 
-                        </div>
-                                <button class="btn btn-primary" type="submit"> Search </button>
-                                </form>    
-                    </div>
-
-                </div>
-
-
 
                 <div class="row-md-6 mx-auto">
                 
                     <div class="col-md-12 mx-auto my-5 ">
-                        {% if videos %}
-                            {% for i in videos %}
+                        {% if results %}
+                            {% for i in results %}
                                 <div class="d-inline-block card w-25 my-3 mx-3">
                                     <div class="card-body">
                                         <h4>{{i.title}}</h4>
@@ -79,7 +65,7 @@
                             {% endfor %}
                         {% else %}
                                 <h2 class="text text-info">
-                                    Wait for The data to be fetched....
+                                    No Video found matching your query 
                                 </h2>
                         {% endif %}
                     </div>
@@ -88,30 +74,31 @@
                 <!-- END DATA CARDS -->
             </div>
                 
+                 
+            <div class="col-md-4 mx-auto my-5">
+                <div class="pagination mx-auto">
+                    <span class="step-links">
+                        {% if results.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ results.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+                        </span>
+
+                        {% if results.has_next %}
+                            <a href="?page={{ results.next_page_number }}">next</a>
+                            <a href="?page={{ results.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+        </div>
 
 
 
         
-       <div class="col-md-4 mx-auto my-5">
-            <div class="pagination mx-auto">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1">&laquo; first</a>
-                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                    {% endif %}
-
-                    <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                    </span>
-
-                    {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}">next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
-       </div>
-
+       
 
         <!-- Js Files -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
