@@ -9,16 +9,18 @@ from .serializers import VideoDataSerializers
 from yt_api.models import *
 from functools import reduce
 import operator
-
+from yt_api.yt_requester import youtube_search
+from yt_api.views import process_data
 
 class VideoDataApiView(APIView):
     def get(self, request, *args, **kwargs):
         '''
         List all the VideoData items in a DB
         '''
-        
+        yt_data = youtube_search()    
+        processed_data = process_data(yt_data)
         data = VideoData.objects.all().order_by('id')
-        print("data : ",type(data))
+        
         serializer = VideoDataSerializers(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
