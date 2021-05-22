@@ -70,6 +70,7 @@ def IndexView(request):
         return render(request,"index.html",context)
 
 
+
 def ErrorPage(request,message):
     return render(request,"error.html",{'msg':message})
 

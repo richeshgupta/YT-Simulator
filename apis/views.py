@@ -17,8 +17,11 @@ class VideoDataApiView(APIView):
         '''
         List all the VideoData items in a DB
         '''
-        yt_data = youtube_search()    
-        processed_data = process_data(yt_data)
+        try:
+            yt_data = youtube_search()    
+            processed_data = process_data(yt_data)
+        except Exception as e:
+            print(str(e))
         data = VideoData.objects.all().order_by('id')
         
         serializer = VideoDataSerializers(data, many=True)
