@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from yt_api.models import *
 
 
+
 def SearchResults(request,query):
     """
         Querying DB to match Description or Title
