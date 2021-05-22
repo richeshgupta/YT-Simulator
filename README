@@ -18,6 +18,8 @@ A webApp which fetches Youtube videos on certain topic and saves it in database,
     GET /api/getSearch/?query=dog
                 It searches the DB for the query in title or description
 
+## Deployed in
+    http://ytsim.pythonanywhere.com/
             
     
         
