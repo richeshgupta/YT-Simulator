@@ -1,4 +1,4 @@
-# YTSimulator
+#YTSimulator
 A webApp which fetches Youtube videos on certain topic and saves it in database, where you can search it too.
 ## How to build Project
     I. Clone the Project
