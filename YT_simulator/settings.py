@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'yt_api',
     'search',
+    'apis',
     
 ]
 

@@ -58,7 +58,7 @@ def IndexView(request):
             print("ERROR : ",str(e))
             print("API LIMIT EXHAUSTED!")
         
-        vid_objs = VideoData.objects.all().order_by('-id')
+        vid_objs = VideoData.objects.all().order_by('id')
         paginator = Paginator(vid_objs, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -68,6 +68,7 @@ def IndexView(request):
             'videos':page_obj,
         }
         return render(request,"index.html",context)
+
 
 def ErrorPage(request,message):
     return render(request,"error.html",{'msg':message})

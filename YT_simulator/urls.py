@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('yt_api.urls')),
     path('',include('search.urls')),
+    path('api/',include('apis.urls')),
 ]
