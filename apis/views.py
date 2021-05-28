@@ -17,6 +17,7 @@ class VideoDataApiView(APIView):
         '''
         List all the VideoData items in a DB
         '''
+        
         try:
             yt_data = youtube_search()    
             processed_data = process_data(yt_data)
@@ -37,12 +38,9 @@ class VideoSearchApiView(APIView):
         
         query = request.query_params.get('query',None)
 
-
-        print("Query : ",query)
-        if(len(query)<1):
-            data = VideoData.objects.all().order_by('-id')
-            print("data : ",type(data))
-            serializer = VideoDataSerializers(data, many=True)
+        if(query==None or len(query)<1):
+            
+            serializer = VideoDataSerializers([], many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         else:
@@ -51,8 +49,6 @@ class VideoSearchApiView(APIView):
             res_set = Q()
             for i in query:
                 res_set = VideoData.objects.filter(Q(title__icontains = i) | Q(description__icontains = i))
-            print("search : ",type(res_set))
-            
-            # res_set = VideoData.objects.filter(reduce(operator.or_, res_set))
+
             serializer = VideoDataSerializers(res_set, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
