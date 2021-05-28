@@ -4,10 +4,10 @@ from googleapiclient.errors import HttpError
 import json
 
 # Global Variables 
-DEVELOPER_KEY = "AIzaSyDhGRDCLOwXndCOZhJLq6XFXTi5JOUqlxU"
+# DEVELOPER_KEY = "AIzaSyDhGRDCLOwXndCOZhJLq6XFXTi5JOUqlxU"
 # DEVELOPER_KEY ="AIzaSyCq5-gn3kx69Fxy_3Ee9IywglfD4fgMg14"
 # DEVELOPER_KEY="AIzaSyB-Gq2kFnNTbODAHqOLNwdLvc5fYWWD9sQ"
-# DEVELOPER_KEY = "AIzaSyDBKwqAXrxvpwvoKzB5M7pU38kYl90ec5g"
+DEVELOPER_KEY = "AIzaSyDBKwqAXrxvpwvoKzB5M7pU38kYl90ec5g"
 SERVICE_VERSION = 'v3'
 SERVICE_NAME="youtube"
 QUERY = "Games or food or fashion or Tutorial"
